@@ -227,6 +227,8 @@ En conclusión, los resultados del test han sido un exito, consiguiendo que el s
 
 
 ## Captura de datos
+Otro de los apartados importantes desarrollados dentro del proyecto ha sido la parte de captura y monitorización de datos, aprovechando toda la sensórica que incluye un microcontrolador arduino. Este aspecto puede ser muy importante a la hora de monitorizar y analizar como se comporta el robot en sus movimientos de cara a mejorar su performance y los algoritmos de conducción autonóma, por ejemplo. Todos los archivos correspondientes a la captura y monitorización de datos se encuentran disponibles en el presente repositorio, en la carpeta `captura_datos`.
+
 La estructura de captura de datos propuesta se basa en generar registros discretos de datos que serán leidos periodicamente. Para lograr esto en primer luegar se tiene un programa `.ino` que se carga en arduino y que permite que lea desde los sensores de:
 
 - Sensor de presión LPS22HB barometrico con rango de medición entre 260 y 1260 hPa. 
@@ -381,13 +383,33 @@ serialExcel.writeFile("DataImportada.xls")
 ```
 
 ## Monitorización de datos
+Una vez toda la infraestructura y el código para la captura automática de datos ha sido desarrolllada, el último paso es diseñar los 'dashboard' y las gráficas más adecuadas para poder sacar conclusiones y conocimiento a partir de los datos generados.
 
+En este caso, tal y como se ha explicado en el apartado anterior, los programas de Python irán guardando en un archivo Excel los datos de los siguientes sensores en los ejes X, Y y Z: acelerómetro, giroscopio, magnetóemtro y sensor de presión. A continuación se muestra un ejemplo de una línea de registro que se genera en el Excel:
 
+| Fecha Hora | gyroX | gyroY | gyro Z | magX | magY| magZ | accelX | accelY | accelZ | presion
+| -------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| 02/04/2023, 19:56:49   | 0,14 | -0,06 | 0,98 | -1,04 | 0,31 | -0,67 | 1,39 | 16,13 | -9,44 | 101,1
 
+En el repositorio se ha guardado un excel de ejemplo con una lectura de 500 registros distintos: `DataImportada.xls`.
 
-<div class='tableauPlaceholder' id='viz1675549500447' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;mo&#47;monitorizacion_sensores_arduino&#47;Acelermetro&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='views&#47;monitorizacion_sensores_arduino&#47;Acelermetro?:language=es-ES&amp;:embed=true' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;mo&#47;monitorizacion_sensores_arduino&#47;Acelermetro&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1675549500447');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+Una vez definido el rango de tiempo para el análisis, a partir de estas tablas es posible dibujar diferentes gráficas que ayuden a monitorizar la evolución de lectura de los sensores. En este caso, a traves del software 'Tableau', se ha procedido a diseñar los siguientes dashboards o gráficas:
+- Evolución de aceleraciones en eje X, Y y Z.
+- Evolución de la lectura del giroscopio en eje X, Y y Z.
+- Evolución del sensor magnetómetro en el eje X, Y y Z.
+- Evolución de la presión.
+
+Todos estos gráficos se encuentran disponibles en un repositorio público en los servidores de Tableau, que es accesible desde el siguiente [enlace](https://public.tableau.com/views/monitorizacion_sensores_arduino/Acelermetro?:language=es-ES&:display_count=n&:origin=viz_share_link).
+
+A modo de ejemplo se adjunta en la siguiente imagen el gráfico de la evolución de la lectura del magnetómetro:
+
+<div class='tableauPlaceholder' id='viz1675551084834' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;mo&#47;monitorizacion_sensores_arduino&#47;Magnetmetro&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='monitorizacion_sensores_arduino&#47;Magnetmetro' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;mo&#47;monitorizacion_sensores_arduino&#47;Magnetmetro&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1675551084834');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
 
 ## Conclusiones y líneas futuras
 En resumen, partiendo del proyecto previo realizado por Mathias Müller y Vladlen Koltun, se ha conseguido desarrollar el código de programación y la infraestructura necesaria para conseguir que el hoverboard pueda ser controlado de manera autónoma gracias a la aplicación Openbot. Para ello, se ha modelado todo el diseño 3D con los componentes necesarios, así como el código del arduino y toda la conexión de cables que se debe hacer para que todos los elementos se comuniquen correctamente.
 
 No obstante, un problema con la batería del hoverboard ha obligado a que el test funcionamiento se haya limitado a controlar un servomotor estandar. Los resultados han sido muy positivos y se ha conseguido que el servo responda y se mueva ante los movimientos de personas que detecta la aplicación Openbot en el smartphone. No obstante, se propone como línea futura del proyecto el extender el test a un hoverboard (una vez solucionado el problema con la batería), con el objetivo de validar al 100% que toda la comunicación entre los elementos (smartphone, arduino, controlador motor y motor) y el control autónomo del hoverboard es óptimo.
+
+En cuanto a la monitorización y análisis de datos, se ha conseguido desarrollar un sistema y código que es capaz de realizar de una manera automática y autónoma la captura de datos del arduino y el guardado en un en un archivo Excel. Además, a traves del software Tableau, se han diseñado varios 'dashboards' donde poder visualizar y monitorizar los datos que recojen los sensores.
+
+Sin embargo, esta parte de la monitorización podría escalarse facilmente si las circunstancias lo requieren. Esto se podríar realizar modificando el código y generando un programa que lea constantemente los datos que estan entrando y los suba directamente a una base de datos. Para esto se debe tener en consideración la frecuencia con la que se reciben los datos y cada cuanto tiempo el programa `.py` debería captarlos.
