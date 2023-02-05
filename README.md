@@ -214,7 +214,7 @@ Como todo el código esta pensado para que el valor recibido en la función `.wr
 
 Además, al haber conectado solo un pin al servo (A0 en este caso), solo funcionará la variable de servo `ESC`, que está asignada a la variable de pin `PIN_PWM_T`.
 
-No obstante, siendo conocedores de las limitaciones del servo estandar utilizado, se ha decidido no realizar ninguna modificación al programa arduino elaborado inicialmente, ya que supondría modificar toda la lógica tanto del código de la app móvil como la del arduino. Esta decisión se basa en que el objetivo final del proyecto (aunque al final sea tratado en este trabajo) es que el código funcione en el hoverboard, y no en un servo estandar. Por ello, las pruebas se destinarán a confirmar en que las comunicaciones se realizan correctamente entre los distintos elementos y que la aplicación móvil Openbot funciona correctamente.
+No obstante, siendo conocedores de las limitaciones del servo estandar utilizado, se ha decidido no realizar ninguna modificación al programa arduino elaborado inicialmente, ya que supondría modificar toda la lógica tanto del código de la app móvil como la del arduino. Esta decisión se basa en que el objetivo final del proyecto (aunque al final no pueda ser tratado en este trabajo) es que el código funcione en el hoverboard, y no en un servo estandar. Por ello, las pruebas se destinarán a confirmar que las comunicaciones se realizan correctamente entre los distintos elementos y que la aplicación móvil Openbot funciona correctamente.
 
 
 ### Test y Resultados
